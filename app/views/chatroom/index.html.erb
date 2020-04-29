@@ -11,20 +11,15 @@
 
         <div class="ui feed">
 
-          <div class="event">
-            <div class="content">
-              <div class="summary">
-                <em>Username 1</em>: Test Message
+          <% @messages.all.each do |message| %>
+            <div class="event">
+              <div class="content">
+                <div class="summary">
+                  <em><%= message.user.username %></em>: <%= message.body %>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="event">
-            <div class="content">
-              <div class="summary">
-                <em>Username 2</em>: Test Reply Message
-              </div>
-            </div>
-          </div>
+          <% end %>
 
         </div>
 
