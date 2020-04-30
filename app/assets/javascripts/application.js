@@ -20,13 +20,31 @@
 scroll_bottom = function() {
   if ($('#messages').length > 0) {
     $('#messages').scrollTop($('#messages')[0].scrollHeight);
-  }
-}
+  };
+};
+
+submit_message = function() {
+  $('#message_body').on('keydown', function(e) {
+    if(e.keyCode == 13) {
+      $('button').click();
+      e.target.value = "";
+    };
+  });
+};
 
 $(document).on('turbolinks:load', function() {
   $('.ui.dropdown').dropdown();
   $('.message .close').on('click', function() {
     $(this).closest('.message').transition('fade');
   });
+  
+  // Form was already working with hitting 'enter' key, so it was displaying twice
+  //submit_message();
+
+  //Added this to grab the form, and when AJAX sends the message, we simply clear the message field
+  $('#chat-form').on('ajax:send', function() {
+    $('#chat-message').val("").focus();
+  });
+
   scroll_bottom();
 })
