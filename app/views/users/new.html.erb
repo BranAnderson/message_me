@@ -1,21 +1,31 @@
 <h2 class="ui center aligned header">
-  Welcome to MessageMe - <em>a complete Chat App</em>
+  Sign Up for MessageMe
 </h2>
 <h4 class="ui center aligned medium icon header">
-  <i class="orange circular power off icon"></i>
+  <i class="orange circular paper plane outline icon"></i>
   Login to continue
 </h4>
 
+<%= render 'shared/errors', obj: @user %>
+
 <div class="ui placeholder segment">
-  <div class="ui two column very relaxed stackable grid">
     <div class="column">
-      <%= form_for(:session, html: {class: "ui form", role: "form"}, url: login_path) do |f| %>
+
+      <%= form_with(model: @user, html: {class: "ui form", role: "form"}, url: users_path) do |f| %>
 
         <div class="field">
           <%= f.label :username, "Username" %>
           <div class="ui left icon input">
             <%= f.text_field :username, placeholder: "Username" %>
             <i class="user icon"></i>
+          </div>
+        </div>
+
+        <div class="field">
+          <%= f.label :email, "Email" %>
+          <div class="ui left icon input">
+            <%= f.email_field :email, placeholder: "Email" %>
+            <i class="envelope icon"></i>
           </div>
         </div>
 
@@ -27,16 +37,8 @@
           </div>
         </div>
 
-        <%= f.button "Login", class: "ui orange submit button" %>
-      
+        <%= f.submit "Sign Up", class: "ui orange submit button" %>
+
       <% end %>
     </div>
-
-    <div class="middle aligned column">
-      <%= link_to "Sign Up", signup_path, class: 'ui orange big button disabled' %>
-    </div>
-  </div>
-  <div class="ui vertical divider">
-    Or
-  </div>
 </div>
